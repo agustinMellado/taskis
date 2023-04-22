@@ -1,0 +1,7 @@
+{
+  "name": "app_tareas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
