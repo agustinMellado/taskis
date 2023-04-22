@@ -11,9 +11,14 @@ export class HeaderComponent implements OnInit {
   @Input() botonAtras: string; //para agregar ruta p/retroceder
   @Input() isModal: string; //para verificar si estamos usando el header en una modal
   @Input() color: string;
-  @Input() centerTitle: boolean;
+  @Input() centrarTitulo: boolean;
   
+  darkMode;
   constructor() {}
 
   ngOnInit() {}
+
+  setTheme(darkMode:boolean){
+    this.darkMode = darkMode;
+  }
 }

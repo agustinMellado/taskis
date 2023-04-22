@@ -1,3 +1,24 @@
-<p>
-  header works!
-</p>
+<ion-header>
+  <ion-toolbar [color]="color ? color : 'primary'">
+    <!-- cerrar modal -->
+    <ion-buttons *ngIf="botonAtras" slot="start">
+        <ion-button *ngIf="isModal">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </ion-button>
+        <!-- boton atras -->
+        <ion-back-button [defaultHref]="botonAtras"></ion-back-button>
+    </ion-buttons>
+    <!-- titutlo -->
+    <ion-title *ngIf="titulo" [ngClass]="{'ion-text-center': centrarTitulo}">{{titulo}}</ion-title>
+    <!-- botton para cambiar modo -->
+    <ion-buttons slot="end">
+      
+      <ion-button (click)="setTheme(false)" *ngIf="darkMode">
+        <ion-icon  name="sunny-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="setTheme(true)" *ngIf="!darkMode">
+        <ion-icon  name="moon-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
