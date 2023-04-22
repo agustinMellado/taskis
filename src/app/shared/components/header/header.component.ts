@@ -12,12 +12,11 @@ export class HeaderComponent implements OnInit {
   @Input() isModal: string; //para verificar si estamos usando el header en una modal
   @Input() color: string;
   @Input() centrarTitulo: boolean;
-  
-  darkMode;
+  darkMode;//funcion dark
   constructor() {}
 
   ngOnInit() {}
-
+  // recibe un valor booleano para cambiar el modo a nocturno/diurno
   setTheme(darkMode:boolean){
     this.darkMode = darkMode;
   }
