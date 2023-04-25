@@ -13,10 +13,10 @@
     <!-- botton para cambiar modo -->
     <ion-buttons slot="end">
       
-      <ion-button (click)="setTheme(false)" *ngIf="darkMode">
+      <ion-button (click)="setTheme(false)" *ngIf="darkMode.value">
         <ion-icon  name="sunny-outline"></ion-icon>
       </ion-button>
-      <ion-button (click)="setTheme(true)" *ngIf="!darkMode">
+      <ion-button (click)="setTheme(true)" *ngIf="!darkMode.value">
         <ion-icon  name="moon-outline"></ion-icon>
       </ion-button>
     </ion-buttons>

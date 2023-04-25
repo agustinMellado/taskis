@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -6,18 +8,24 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  //Uso el decorador Input, pasando informacion del hijo al padre
+  //Uso el decorador Input, pasando informacion del hijo al padre.
   @Input() titulo: string;
-  @Input() botonAtras: string; //para agregar ruta p/retroceder
-  @Input() isModal: string; //para verificar si estamos usando el header en una modal
+  @Input() botonAtras: string; //para agregar ruta p/retroceder.
+  @Input() isModal: string; //para verificar si estamos usando el header en una modal.
   @Input() color: string;
   @Input() centrarTitulo: boolean;
-  darkMode;//funcion dark
-  constructor() {}
+  darkMode:BehaviorSubject<boolean>//funcion dark .
+  constructor(private themeSvc: ThemeService) {}
 
-  ngOnInit() {}
-  // recibe un valor booleano para cambiar el modo a nocturno/diurno
-  setTheme(darkMode:boolean){
-    this.darkMode = darkMode;
+  ngOnInit() {
+
+    this.darkMode= this.themeSvc.darkMode;
+
   }
+  // recibe un valor booleano para cambiar el modo a nocturno/diurno.
+  setTheme(darkMode:boolean){
+    //va al servicio themeService llevando el dato booleano.
+    this.themeSvc.setTheme(darkMode)
+  }
+
 }
