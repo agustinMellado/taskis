@@ -24,3 +24,15 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+ion-content{
+    --background: var(--ion-color-primary);//color primario.
+    --color: var(--ion-color-primary-contrast);//color de constraste
+}
+.content{
+    width: 100%;
+    height: 88vh;
+    background: var(--ion-color-light);
+    color: var(--ion-color-light-contrast);
+    border-radius: 20px 20px 0 0;
+}
