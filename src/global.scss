@@ -25,6 +25,10 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+
+h1{
+    font-size: 30px;
+}
 ion-content{
     --background: var(--ion-color-primary);//color primario.
     --color: var(--ion-color-primary-contrast);//color de constraste
