@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-custom-input',
@@ -7,6 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomInputComponent  implements OnInit {
 
+  @Input() control: FormControl;
+  @Input() label: string;
+  @Input() icon: string;
+  @Input() type: string;
+  @Input() autocomplete: string;
+
+  
+
+  
   constructor() { }
 
   ngOnInit() {}
