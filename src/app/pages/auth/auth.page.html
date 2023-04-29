@@ -5,5 +5,12 @@
   <app-header ></app-header>
   <app-logo></app-logo>
   <h2 class="ion-text-center  ion-no-margin">Login</h2>
-  <div class="content"></div>
+  <div class="content"> 
+    <!-- formulario de logeo -->
+    <form action="">
+    <app-custom-input [control]="form.controls.email" type="email" label="Correo" icon="mail-outline"></app-custom-input>
+    <app-custom-input [control]="form.controls.password" type="password" label="Contraseña" icon="lock-closed-outline"></app-custom-input>
+
+  </form></div>
+
 </ion-content>
