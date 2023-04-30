@@ -1,14 +1,36 @@
 <ion-content>
   <!-- como estamos entre paginas se aplica el boton creado para ir atras -->
-  <app-header botonAtras="/auth" > 
-  </app-header>
+  <app-header botonAtras="/auth"> </app-header>
   <app-logo></app-logo>
   <h2 class="ion-text-center ion-no-margin">Nuevo usuario</h2>
   <div class="content">
     <div class="d-flex-center">
       <!-- formulario de logeo -->
-      <form (keyup.enter)="submit()" (ngSubmit)="submit()" class="ion-text-center">
+      <form
+        (keyup.enter)="submit()"
+        (ngSubmit)="submit()"
+        class="ion-text-center"
+      >
+        <!-- ingreso nombre  -->
         <app-custom-input
+          autocomplete="name"
+          [control]="form.controls.name"
+          type="text"
+          label="Nombre"
+          icon="person-outline"
+        ></app-custom-input>
+        <!-- contemplar posibles errores -->
+        <div
+          class="validators"
+          *ngIf="form.controls.name.errors && form.controls.name.dirty "
+        >
+          <div *ngIf="form.controls.name.errors?.['required']">
+            Ingresa tu nombre
+          </div>
+        </div>
+        <!-- ingreso email -->
+        <app-custom-input
+          autocomplete="email"
           [control]="form.controls.email"
           type="email"
           label="Correo"
@@ -20,24 +42,48 @@
           *ngIf="form.controls.email.errors && form.controls.email.dirty "
         >
           <div *ngIf="form.controls.email.errors?.['required']">
-            Ingresa tu email
+            Ingresa tu name
           </div>
           <div *ngIf="form.controls.email.errors?.['email']">
             Ingresa un email valido
           </div>
         </div>
+        <!-- ingreso contraseña  -->
         <app-custom-input
           [control]="form.controls.password"
           type="password"
           label="Contraseña"
           icon="lock-closed-outline"
         ></app-custom-input>
+        <!-- contemplar posibles errores -->
         <div
           class="validators"
           *ngIf="form.controls.password.errors && form.controls.password.dirty "
         >
           <div *ngIf="form.controls.password.errors?.['required']">
             Ingresa tu contraseña
+          </div>
+          <div *ngIf="form.controls.password.errors?.['minlength']">
+            Su contraseña debe tener mas de 8 caracteres
+          </div>
+        </div>
+        <!-- ingreso confirmacion de contraseña -->
+        <app-custom-input
+          [control]="form.controls.confirmPassword"
+          type="password"
+          label="Confirmar Contraseña"
+          icon="checkmark-circle-outline"
+        ></app-custom-input>
+        <!-- contemplar posibles errores -->
+        <div
+          class="validators"
+          *ngIf="form.controls.confirmPassword.errors && form.controls.confirmPassword.dirty "
+        >
+          <div *ngIf="form.controls.confirmPassword.errors?.['required']">
+            Ingresa tu contraseña
+          </div>
+          <div *ngIf="form.controls.confirmPassword.errors?.['noMatch']">
+            Las contraseñas no coinciden
           </div>
         </div>
         <ion-button
@@ -51,7 +97,11 @@
         </ion-button>
         <div class="boton-registro">
           <div>No tienes cuenta?</div>
-          <ion-button routerLink="registro" class="ion-margin-vertical" shape="round">
+          <ion-button
+            routerLink="registro"
+            class="ion-margin-vertical"
+            shape="round"
+          >
             Registrarse
             <ion-icon slot="end" name="person-add-outline"></ion-icon>
           </ion-button>
@@ -60,4 +110,3 @@
     </div>
   </div>
 </ion-content>
-
