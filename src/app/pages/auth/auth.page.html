@@ -3,45 +3,58 @@
   <app-logo></app-logo>
   <h2 class="ion-text-center ion-no-margin">Login</h2>
   <div class="content">
-    <!-- formulario de logeo -->
-    <form class="ion-text-center">
-      <app-custom-input
-        [control]="form.controls.email"
-        type="email"
-        label="Correo"
-        icon="mail-outline"
-      ></app-custom-input>
-      <!-- contemplar posibles errores -->
-      <div
-        class="validators"
-        *ngIf="form.controls.email.errors && form.controls.email.dirty "
-      >
-        <div *ngIf="form.controls.email.errors?.['required']">
-          Ingresa tu email
+    <div class="d-flex-center">
+      <!-- formulario de logeo -->
+      <form class="ion-text-center">
+        <app-custom-input
+          [control]="form.controls.email"
+          type="email"
+          label="Correo"
+          icon="mail-outline"
+        ></app-custom-input>
+        <!-- contemplar posibles errores -->
+        <div
+          class="validators"
+          *ngIf="form.controls.email.errors && form.controls.email.dirty "
+        >
+          <div *ngIf="form.controls.email.errors?.['required']">
+            Ingresa tu email
+          </div>
+          <div *ngIf="form.controls.email.errors?.['email']">
+            Ingresa un email valido
+          </div>
         </div>
-        <div *ngIf="form.controls.email.errors?.['email']">
-          Ingresa un email valido
+        <app-custom-input
+          [control]="form.controls.password"
+          type="password"
+          label="Contraseña"
+          icon="lock-closed-outline"
+        ></app-custom-input>
+        <div
+          class="validators"
+          *ngIf="form.controls.password.errors && form.controls.password.dirty "
+        >
+          <div *ngIf="form.controls.password.errors?.['required']">
+            Ingresa tu contraseña
+          </div>
         </div>
-      </div>
-      <app-custom-input
-        [control]="form.controls.password"
-        type="password"
-        label="Contraseña"
-        icon="lock-closed-outline"
-      ></app-custom-input>
-      <div
-        class="validators"
-        *ngIf="form.controls.password.errors && form.controls.password.dirty "
-      >
-        <div *ngIf="form.controls.password.errors?.['required']">
-          Ingresa tu contraseña
+        <ion-button
+          class="ion-margin-vertical"
+          [disabled]="form.invalid"
+          type="submit"
+          shape="round"
+        >
+          Acceder
+          <ion-icon slot="end" name="log-in-outline"></ion-icon>
+        </ion-button>
+        <div class="boton-registro">
+          <div>No tienes cuenta?</div>
+          <ion-button class="ion-margin-vertical" shape="round">
+            Registrarse
+            <ion-icon slot="end" name="person-add-outline"></ion-icon>
+          </ion-button>
         </div>
-      </div>
-      <ion-button class="ion-margin-vertical" [disabled]="form.invalid" type="submit"  shape="round">
-        Acceder
-        <ion-icon slot="end" name="log-in-outline"></ion-icon>
-      </ion-button>
-    </form>
-
+      </form>
+    </div>
   </div>
 </ion-content>
