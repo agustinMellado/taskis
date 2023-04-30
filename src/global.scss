@@ -56,3 +56,7 @@ ion-item{
     padding-bottom: 15px;
     text-align: center;
 }
+ion-button{
+    //Solo la primer letra mayuscula.
+    text-transform:capitalize ;
+}
