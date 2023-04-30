@@ -60,3 +60,8 @@ ion-button{
     //Solo la primer letra mayuscula.
     text-transform:capitalize ;
 }
+.d-flex-center{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
