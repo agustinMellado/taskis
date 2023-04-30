@@ -5,7 +5,7 @@
   <div class="content">
     <div class="d-flex-center">
       <!-- formulario de logeo -->
-      <form class="ion-text-center">
+      <form (keyup.enter)="submit()" (ngSubmit)="submit()" class="ion-text-center">
         <app-custom-input
           [control]="form.controls.email"
           type="email"

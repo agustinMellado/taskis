@@ -8,12 +8,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AuthPage implements OnInit {
   form = new FormGroup({
-    email: new FormControl('',[Validators.required, Validators.email ]),
-    password: new FormControl('',[Validators.required])
-  })
-  constructor() { }
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
+  });
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+//toma lo que se escribio en el formulario.
+  submit() {
+    if (this.form.valid) {
+      console.log(this.form.value);
+    }
   }
-
 }
