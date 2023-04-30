@@ -49,3 +49,10 @@ ion-content{
 ion-item{
     --background: transparent;
 }
+//estilo para mostrar el error 
+.validators{
+    font-size: 14px;
+    color: var(--ion-color-danger);
+    padding-bottom: 15px;
+    text-align: center;
+}
