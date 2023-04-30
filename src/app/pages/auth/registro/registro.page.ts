@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/models/user.model';
+import { FirebaseService } from 'src/app/services/firebase.service';
 import { CustomValidators } from 'src/app/utils/custom-validators';
 @Component({
   selector: 'app-registro',
@@ -13,7 +15,7 @@ export class RegistroPage implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(9)]),
     confirmPassword: new FormControl(''),
   });
-  constructor() {}
+  constructor(private firebaseSvc: FirebaseService) {}
 
   ngOnInit() {
     this.confirmPasswordValidator();
@@ -33,5 +35,10 @@ export class RegistroPage implements OnInit {
     if (this.form.valid) {
       console.log(this.form.value);
     }
+    this.firebaseSvc.signUp(this.form.value as User).then(res=>{
+      console.log(res)
+    }, error=>{
+      console.log(error);
+    })
   }
 }
