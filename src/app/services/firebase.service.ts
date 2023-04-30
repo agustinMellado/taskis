@@ -10,12 +10,12 @@ export class FirebaseService {
   constructor(private auth: AngularFireAuth, private db: AngularFirestore) {}
   //autentificacion
 
-  //
+  //logueo
   login(user: User) {
     return this.auth.signInWithEmailAndPassword(user.email, user.password);
   }
   //Registro
   signUp(user: User) {
-    return this.auth.signInWithEmailAndPassword(user.email, user.password);
+    return this.auth.createUserWithEmailAndPassword(user.email, user.password);
   }
 }
