@@ -37,7 +37,7 @@
           Ingresa tu contraseña
         </div>
       </div>
-      <ion-button type="submit"  shape="round">
+      <ion-button class="ion-margin-vertical" [disabled]="form.invalid" type="submit"  shape="round">
         Acceder
         <ion-icon slot="end" name="log-in-outline"></ion-icon>
       </ion-button>
