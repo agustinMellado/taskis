@@ -1,5 +1,5 @@
 <ion-item class="ion-margin-vertical">
-  <ion-icon *ngIf="icon" slot="start" [name]="icon"></ion-icon>
+  <ion-icon color="primary"*ngIf="icon" slot="start" [name]="icon"></ion-icon>
   <ion-label position="floating">{{label}}</ion-label>
   <ion-input [autocomplete]="autocomplete" [type]="type" [formControl]="control"></ion-input>
   <ion-buttons *ngIf="isPassword" slot="end">
