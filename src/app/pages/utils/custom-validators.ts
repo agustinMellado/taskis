@@ -1,0 +1,10 @@
+import { AbstractControl } from "@angular/forms";
+
+export class CustomValidators{
+    static matchesValues(toCompare: AbstractControl){
+        return (control:AbstractControl)=>{
+            if (control.value !== toCompare.value) return{noMatch:true};
+            return null;
+            }
+        }
+    }
