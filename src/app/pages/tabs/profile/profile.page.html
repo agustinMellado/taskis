@@ -2,6 +2,10 @@
 
   <app-header tittle="Perfil"></app-header>
   <div class="content">
+
+    <h2>{{user.name}}</h2>
+    <div>{{user.email}}</div>
+
     <ion-button (click)="signOut()" shape="round">
       Cerrar Sesion
       <ion-icon slot="end" name="log-out-outline"></ion-icon>
