@@ -25,4 +25,9 @@ export class FirebaseService {
     const auth = getAuth();
     return updateProfile(auth.currentUser, user)
   }
+//retornamos el estado de la autenticacion del usuario.
+  getAuthState() {
+    return this.auth.authState
+
+  }
 }
