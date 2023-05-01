@@ -1,0 +1,19 @@
+ion-card{
+    border-radius:15px;
+    padding: 10px;
+    min-height: 200px;
+    box-shadow: 10px 10px 12px -11px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 10px 12px -11px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 12px -11px rgba(0,0,0,0.75);
+}
+ion-card:hover{
+    cursor:pointer;
+    background-color: var(--ion-color-light)
+}
+
+.titulo{
+    font-size:18px;
+    font-weight: bold;
+    padding-top:10px;
+    line-height: 20px;
+}
