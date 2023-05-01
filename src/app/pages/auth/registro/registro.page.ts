@@ -34,11 +34,17 @@ export class RegistroPage implements OnInit {
   submit() {
     if (this.form.valid) {
       console.log(this.form.value);
-    }
+    }//primero registramos el usuario
     this.firebaseSvc.signUp(this.form.value as User).then(async res=>{
       console.log(res)
-      //Registramos al usuario pasando por parametro el name tomado del formulario
+      //luego actualizamos el nombre el usuario tomando el valor del input del registro
       await this.firebaseSvc.updateUser({displayName: this.form.value.name}) //displayName permite editar la variable del usuario
+      //variable local para guardar el usuario
+      let user: User ={//estructura
+        uid: res.user.uid,
+        name: res.user.displayName,
+        email: res.user.email
+      }
     }, error=>{
       console.log(error);
     })
