@@ -7,5 +7,5 @@ export interface Tareas{
 //propiedades de los items
 export interface Item {
     name:string;
-    complete:boolean;
+    finalizado:boolean;
 }

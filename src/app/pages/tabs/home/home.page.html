@@ -2,5 +2,18 @@
 
 <ion-content>
 <app-header titulo="Tareas"></app-header>
-<div class="content"></div>
+<div class="content">
+    <ion-grid>
+        <ion-row>
+            <!-- configuracion de tamanios para cada tipo de pantalla -->
+            <ion-col *ngFor="let t of tareas" size-lg="6" size-md="6" size-sm="12" size="12">
+                <ion-card mode="md">
+                    <div class="title">{{t.titulo}}</div>
+                    <p>{{t.descripcion}}</p>
+                </ion-card>
+            </ion-col>
+            
+        </ion-row>
+    </ion-grid>
+</div>
 </ion-content>
