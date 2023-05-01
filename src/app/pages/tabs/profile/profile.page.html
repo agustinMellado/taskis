@@ -1,13 +1,12 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-header tittle="Perfil"></app-header>
+  <div class="content">
+    <ion-button (click)="signOut()" shape="round">
+      Cerrar Sesion
+      <ion-icon slot="end" name="log-out-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+
 </ion-content>
