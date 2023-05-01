@@ -20,16 +20,34 @@ export class ProfilePage implements OnInit {
   //funcion para cargar informacion de cada usuario que entra a la pagina.
   ionViewWillEnter() {
     //se ejecuta cuando el usuario entra a la pagina
-    this.getUser()
+    this.getUser();
+  }
+
+
+  //tomo informacion del usuario
+  getUser() {
+    return (this.user = this.utilsSvc.getElementFrontLocalStorage('user'));
   }
 
   //cerrar sesion
   signOut() {
-    //llamo a la funcion cerrar sesion
-    this.firebaseSvc.signOut();
-  }
-  //tomo informacion del usuario
-  getUser() {
-    return (this.user = this.utilsSvc.getElementFrontLocalStorage('user'));
+    this.utilsSvc.presentAlert({
+      header: 'Cerrar Sesion',
+      message: '¿Quieres cerrar sesion?',
+      mode: 'md',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Si, cerrar',
+          handler: () => {
+            //cierra sesion
+            this.firebaseSvc.signOut();
+          },
+        },
+      ],
+    });
   }
 }

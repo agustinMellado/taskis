@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {
+  AlertController,
+  AlertOptions,
   LoadingController,
   LoadingOptions,
   ToastController,
@@ -14,7 +16,8 @@ export class UtilsService {
   constructor(
     private loadingController: LoadingController,
     private router: Router,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private alertController: AlertController
   ) {}
   //LOADING
   //muestra que se estan cargando los datos
@@ -40,10 +43,16 @@ export class UtilsService {
   //para mostrar un mensaje por pantalla
   async presentToast(opts: ToastOptions) {
     const toast = await this.toastController.create(opts);
-    toast.present(); 
+    toast.present();
   }
   //routeo para trabajar con la url
   routerLink(url: string) {
     return this.router.navigateByUrl(url);
+  }
+  //alertas
+  async presentAlert(opts: AlertOptions) {
+    const alert = await this.alertController.create(opts);
+
+    await alert.present();
   }
 }
