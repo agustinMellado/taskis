@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Tareas } from 'src/app/models/tareas.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { AgregarActualizarTareaComponent } from 'src/app/shared/components/agregar-actualizar-tarea/agregar-actualizar-tarea.component';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -17,7 +18,7 @@ export class HomePage implements OnInit {
       item: [{
         name:'act 1', finalizado:true,
       },{
-        name:'act 2', finalizado:false,
+        name:'act 2', finalizado:true,
       },{
         name:'afalse', finalizado:false,
       }],
@@ -57,5 +58,13 @@ export class HomePage implements OnInit {
   getPorcentaje(tarea:Tareas){
     //mando por parametro las tareas
     return this.utilsSvc.getPorcentaje(tarea)
+  }
+  agregarOActualizarTarea(tarea?:Tareas){
+    this.utilsSvc.presentModal({
+      component: AgregarActualizarTareaComponent,
+      componentProps:{tarea},
+      cssClass:'agregar-actualizar-modal'
+    })
+
   }
 }

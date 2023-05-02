@@ -4,7 +4,7 @@
     <app-header titulo="Tareas"></app-header>
     <div class="content">
        
-            <ion-button   class="ion-margin" >
+            <ion-button  (click)="agregarOActualizarTarea()" class="ion-margin" >
                 Ver Tarea
                 <ion-icon slot="end" name="add-circle-outline"></ion-icon>
             </ion-button>
@@ -26,7 +26,8 @@
                                 [innerStrokeColor]="'#C7E596'"
                                 [animation]="true"
                                 [titleColor]="'var(--ion-color-dark)'" 
-                                [animationDuration]="300"></circle-progress></ion-col>
+                                [animationDuration]="300"
+                                [subtitle]="'progreso'"></circle-progress></ion-col>
                             <ion-col class="ion-padding" size-lg="7" size-md="7" size-sm="8" size="12">
                                 <div class="titulo">{{t.titulo}}</div>
                                 <!-- aplico slice para mostrar cierta cantidad de caracteres -->
