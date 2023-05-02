@@ -60,7 +60,7 @@ export class UtilsService {
     await alert.present();
   }
   //funciones modals
-  //present
+  //presentar o abrir modal
   async presentModal(opts: ModalOptions) {
     const modal = await this.modalController.create(opts)
     
@@ -72,8 +72,8 @@ export class UtilsService {
       return data;
     }
   }
-  //dismiss
-  dismissModal(data){
+  //cerrar modal
+  dismissModal(data?:any){
     this.modalController.dismiss(data)
   }
 
