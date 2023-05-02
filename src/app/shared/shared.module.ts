@@ -7,14 +7,21 @@ import { HeaderComponent } from './components/header/header.component';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { AgregarActualizarTareaComponent } from './components/agregar-actualizar-tarea/agregar-actualizar-tarea.component';
 
 @NgModule({
-  declarations: [HeaderComponent, CustomInputComponent, LogoComponent],
+  declarations: [
+    HeaderComponent,
+    CustomInputComponent,
+    LogoComponent,
+    AgregarActualizarTareaComponent
+  ],
   exports: [
     HeaderComponent,
     CustomInputComponent,
     LogoComponent,
     NgCircleProgressModule,
+    AgregarActualizarTareaComponent
   ],
   imports: [
     CommonModule,
