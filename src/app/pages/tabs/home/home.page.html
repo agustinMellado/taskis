@@ -1,8 +1,13 @@
 
 
 <ion-content>
-<app-header titulo="Tareas"></app-header>
-<div class="content">
+    <app-header titulo="Tareas"></app-header>
+    <div class="content">
+       
+            <ion-button   class="ion-margin" >
+                Ver Tarea
+                <ion-icon slot="end" name="add-circle-outline"></ion-icon>
+            </ion-button>
     <ion-grid>
         <ion-row>
             <!-- configuracion de tamanios para cada tipo de pantalla -->
@@ -22,18 +27,31 @@
                                 [animation]="true"
                                 [titleColor]="'var(--ion-color-dark)'" 
                                 [animationDuration]="300"></circle-progress></ion-col>
-                            <ion-col size-lg="7" size-md="7" size-sm="8" size="12">
+                            <ion-col class="ion-padding" size-lg="7" size-md="7" size-sm="8" size="12">
                                 <div class="titulo">{{t.titulo}}</div>
                                 <!-- aplico slice para mostrar cierta cantidad de caracteres -->
-                                <p>{{t.descripcion | slice:0:85}}</p></ion-col>
+                                <p>{{t.descripcion | slice:0:85}}</p>
+                                <!-- botones -->
+                                <div class="ion-text-center">
+                                    <ion-button   class="boton-tarea" size="small">
+                                        Ver Tarea
+                                        <ion-icon slot="end" name="book-outline"></ion-icon>
+                                    </ion-button>
+                                    <ion-button class="boton-tarea" size="small" color="danger">
+                                        Borrar Tarea
+                                        <ion-icon slot="end" name="trash-outline"></ion-icon>
+                                    </ion-button>
+                                </div>
+                            
+                            </ion-col>
                         </ion-row>
                     </ion-grid>
-
+                
                     
                 </ion-card>
             </ion-col>
             
         </ion-row>
     </ion-grid>
-</div>
+    </div>
 </ion-content>
