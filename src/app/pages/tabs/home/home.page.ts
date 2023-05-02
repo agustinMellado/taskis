@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tareas } from 'src/app/models/tareas.model';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { UtilsService } from 'src/app/services/utils.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -46,7 +48,14 @@ export class HomePage implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(
+    private firebaseSvc: FirebaseService,
+    private utilsSvc: UtilsService
+  ) {}
 
   ngOnInit() {}
+  getPorcentaje(tarea:Tareas){
+    //mando por parametro las tareas
+    return this.utilsSvc.getPorcentaje(tarea)
+  }
 }

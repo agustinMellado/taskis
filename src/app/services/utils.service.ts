@@ -77,7 +77,15 @@ export class UtilsService {
     this.modalController.dismiss(data)
   }
 
+  //funcion para tomar el porcentaje de las tareas
+  getPorcentaje(tarea:Tareas){
+    //obtengo todas los items finalizados en true
+    let itemCompletados=tarea.item.filter(item=>item.finalizado).length;
 
+    let TotalItem= tarea.item.length;//total de tareas del arreglo
+    let porcentaje= (100/itemCompletados)*TotalItem;
+    //aplico parseInt para que de un numero entero 
+    return parseInt(porcentaje.toString())//.toString();para que lo tome como un texto y convierta
 
-  
+  }
 }
