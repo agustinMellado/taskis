@@ -83,7 +83,7 @@ export class UtilsService {
     let itemCompletados=tarea.item.filter(item=>item.finalizado).length;
 
     let TotalItem= tarea.item.length;//total de tareas del arreglo
-    let porcentaje= (100/itemCompletados)*TotalItem;
+    let porcentaje= (100/TotalItem)*itemCompletados;
     //aplico parseInt para que de un numero entero 
     return parseInt(porcentaje.toString())//.toString();para que lo tome como un texto y convierta
 
