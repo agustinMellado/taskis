@@ -11,9 +11,9 @@ export class HeaderComponent implements OnInit {
   //Uso el decorador Input, pasando informacion del hijo al padre.
   @Input() titulo: string;
   @Input() botonAtras: string; //para agregar ruta p/retroceder.
-  @Input() isModal: string; //para verificar si estamos usando el header en una modal.
+  @Input() isModal: boolean; //para verificar si estamos usando el header en una modal.
   @Input() color: string;
-  @Input() centrarTitulo: boolean;
+  @Input() centrarTitulo: boolean;//centra el titulo
   darkMode:BehaviorSubject<boolean>//funcion dark .
   constructor(private themeSvc: ThemeService) {}
 
