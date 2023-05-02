@@ -5,9 +5,12 @@ import {
   AlertOptions,
   LoadingController,
   LoadingOptions,
+  ModalController,
+  ModalOptions,
   ToastController,
   ToastOptions,
 } from '@ionic/angular';
+import { Tareas } from '../models/tareas.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +20,8 @@ export class UtilsService {
     private loadingController: LoadingController,
     private router: Router,
     private toastController: ToastController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private modalController: ModalController
   ) {}
   //LOADING
   //muestra que se estan cargando los datos
@@ -55,4 +59,25 @@ export class UtilsService {
 
     await alert.present();
   }
+  //funciones modals
+  //present
+  async presentModal(opts: ModalOptions) {
+    const modal = await this.modalController.create(opts)
+    
+    await modal.present();
+    //la modal devuelve un valor despues de que se cierre
+    const {data} = await modal.onWillDismiss()
+    //tomo ese valor y lo condiciono
+    if(data){//si existe esa informacion la retornamos
+      return data;
+    }
+  }
+  //dismiss
+  dismissModal(data){
+    this.modalController.dismiss(data)
+  }
+
+
+
+  
 }
