@@ -19,7 +19,7 @@ export class AgregarActualizarTareaComponent  implements OnInit {
     id: new FormControl(''),
     titulo: new FormControl('',[Validators.required,Validators.minLength(4)]),
     descripcion: new FormControl('',[Validators.required,Validators.minLength(4)]),
-    items: new FormControl([],[Validators.required,Validators.minLength(1)])
+    item: new FormControl([],[Validators.required,Validators.minLength(1)])
 
   })
   constructor(

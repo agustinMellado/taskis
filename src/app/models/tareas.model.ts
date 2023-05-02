@@ -2,7 +2,7 @@ export interface Tareas{
     id:string;
     titulo:string;
     descripcion:string;
-    items: Item[]
+    item: Item[]
 }
 //propiedades de los items
 export interface Item {
