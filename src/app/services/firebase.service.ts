@@ -42,4 +42,12 @@ export class FirebaseService {
     //funcion para remover el user del localStorage
     localStorage.removeItem('user');
   }
+
+  // firestore base de datos
+
+  getSubcollection(path: string, subcollectionName: string) {
+    return this.db.doc(path).collection(subcollectionName).valueChanges()
+  }
+
+
 }

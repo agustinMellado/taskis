@@ -26,7 +26,7 @@ export class ProfilePage implements OnInit {
 
   //tomo informacion del usuario
   getUser() {
-    return (this.user = this.utilsSvc.getElementFrontLocalStorage('user'));
+    return this.user = this.utilsSvc.getElementFromLocalStorage('user');
   }
 
   //cerrar sesion

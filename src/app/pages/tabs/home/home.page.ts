@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tareas } from 'src/app/models/tareas.model';
+import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AgregarActualizarTareaComponent } from 'src/app/shared/components/agregar-actualizar-tarea/agregar-actualizar-tarea.component';
@@ -11,42 +12,7 @@ import { AgregarActualizarTareaComponent } from 'src/app/shared/components/agreg
 export class HomePage implements OnInit {
   //Variable que va a almacenar una cadena de objetos
   tareas: Tareas[] = [
-    {
-      id: '1',
-      titulo: ' primer tarea',
-      descripcion: 'Primer terea de prueba',
-      item: [{
-        name:'act 1', finalizado:true,
-      },{
-        name:'act 2', finalizado:true,
-      },{
-        name:'afalse', finalizado:false,
-      }],
-    },
-    {
-      id: '2',
-      titulo: ' 2da tarea',
-      descripcion: 'Primer terea de prueba',
-      item: [{
-        name:'act 1', finalizado:true,
-      },{
-        name:'act 2', finalizado:false,
-      },{
-        name:'afalse', finalizado:false,
-      }],
-    },
-    {
-      id: '3',
-      titulo: ' 3er tarea',
-      descripcion: 'Primer terea de prueba',
-      item: [{
-        name:'act 1', finalizado:true,
-      },{
-        name:'act 2', finalizado:false,
-      },{
-        name:'afalse', finalizado:false,
-      }],
-    },
+    
   ];
 
   constructor(
@@ -68,5 +34,13 @@ export class HomePage implements OnInit {
       cssClass:'agregar-actualizar-modal'
     })
 
+  }
+  // agarro las tareas
+  getTask(){
+    let user: User =this.utilsSvc.getElementFromLocalStorage('user');
+    //nombre de la coleccion
+    let path=`users/${user.uid}`//toma el id
+    //pasamos el path mas el nombre de la coleccion
+    this.firebaseSvc.getSubcollection(path,'tareas')
   }
 }

@@ -16,6 +16,7 @@ import { Tareas } from '../models/tareas.model';
   providedIn: 'root',
 })
 export class UtilsService {
+  
   constructor(
     private loadingController: LoadingController,
     private router: Router,
@@ -41,7 +42,7 @@ export class UtilsService {
     return localStorage.setItem(key, JSON.stringify(element));
   }
   //Tomar datos del localStorage
-  getElementFrontLocalStorage(key: string) {
+  getElementFromLocalStorage(key: string) {
     return JSON.parse(localStorage.getItem(key));
   }
   //para mostrar un mensaje por pantalla
