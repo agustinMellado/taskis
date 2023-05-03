@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border">
   <ion-toolbar [color]="color ? color : 'primary'">
     
-    <ion-buttons  slot="start">
+    <ion-buttons  slot="start" >
         <!-- cerrar modal -->
-        <ion-button  *ngIf="isModal">
+        <ion-button  *ngIf="isModal" (click)="dismissModal()">
           <ion-icon name="close-circle-outline"></ion-icon>
         </ion-button>
         <!-- boton atras -->
