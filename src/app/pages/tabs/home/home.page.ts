@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { log } from 'console';
 import { Tareas } from 'src/app/models/tareas.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -12,9 +11,7 @@ import { AgregarActualizarTareaComponent } from 'src/app/shared/components/agreg
 })
 export class HomePage implements OnInit {
   //Variable que va a almacenar una cadena de objetos
-  tareas: Tareas[] = [
-    
-  ];
+  tareas: Tareas[] = [];
 
   constructor(
     private firebaseSvc: FirebaseService,
@@ -24,8 +21,9 @@ export class HomePage implements OnInit {
   ngOnInit() {
     
   }
-  //vista al entrar
+  //Al entrar a la pagina inicia y muestra la funcion
   ionViewWillEnter() {
+    //llama a esta funcion
     this.getTask()
   }
 
@@ -47,9 +45,11 @@ export class HomePage implements OnInit {
     //nombre de la coleccion
     let path=`users/${user.uid}`//toma el id
     //pasamos el path mas el nombre de la coleccion para suscribirnos
-    this.firebaseSvc.getSubcollection(path,'tareas').subscribe({
-      next:(res)=>{
+    let sub=this.firebaseSvc.getSubcollection(path,'tareas').subscribe({
+      next:(res: Tareas[])=>{
         console.log(res);
+        this.tareas = res
+        sub.unsubscribe();//aplicamos unsubscribe para no saturar a la base de datos con consultas.
       }
     })
   }
