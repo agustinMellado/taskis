@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user.model';
 import { Tareas } from 'src/app/models/tareas.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { ItemReorderEventDetail } from '@ionic/angular';
 
 @Component({
   selector: 'app-agregar-actualizar-tarea',
@@ -39,5 +40,13 @@ export class AgregarActualizarTareaComponent  implements OnInit {
   getPorcentaje(){
     //mando por parametro las tareas
     return this.utilsSvc.getPorcentaje(this.form.value as Tareas);
+  }
+  //reorganizar tareas
+  handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
+
+  
+    this.form.value.item = ev.detail.complete(this.form.value.item);
+
+    
   }
 }

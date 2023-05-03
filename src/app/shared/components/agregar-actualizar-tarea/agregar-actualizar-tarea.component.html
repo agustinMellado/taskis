@@ -53,4 +53,17 @@
     <!-- barra de progreso -->
     <ion-range [value]="getPorcentaje()">
     </ion-range>
+    <!-- Muesta las actividades y permite reorganizarlas -->
+    <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
+            <!-- recorremos los items pero del formulario -->
+          <ion-item *ngFor="let item of form.value.item">
+            <!-- marcar las actividades como finalizadas -->
+            <ion-checkbox slot="start" color="success" [(ngModel)]="item.completed"></ion-checkbox>
+            <ion-label>
+              {{ item.name }}
+            </ion-label>
+            <ion-reorder slot="end"></ion-reorder>
+          </ion-item>
+    </ion-reorder-group>
+      
 </ion-content>
