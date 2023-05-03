@@ -46,6 +46,9 @@
 
     <ion-item class='item-header' lines="none">
         <ion-label>Actividades</ion-label>
+        <!-- Mostramos el progreso de las tareas, si al menos existe una tarea -->
+        <span slot="end" *ngIf="form.value.item.length">Progreso: {{getPorcentaje()}}%</span>
+
         <ion-button slot="end">
             <ion-icon  name="add-circle-outline"></ion-icon>
         </ion-button>
@@ -56,12 +59,19 @@
     <!-- Muesta las actividades y permite reorganizarlas -->
     <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
             <!-- recorremos los items pero del formulario -->
-          <ion-item *ngFor="let item of form.value.item">
+          <ion-item *ngFor="let item of form.value.item; index as i">
             <!-- marcar las actividades como finalizadas -->
-            <ion-checkbox slot="start" color="success" [(ngModel)]="item.completed"></ion-checkbox>
+            <ion-checkbox slot="start" color="success" [(ngModel)]="item.finalizado"></ion-checkbox>
             <ion-label>
               {{ item.name }}
             </ion-label>
+
+            <ion-buttons slot="end">
+                <ion-button (click)="removeItem(i)">
+                    <ion-icon slot="start" name="trash-outline"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+
             <ion-reorder slot="end"></ion-reorder>
           </ion-item>
     </ion-reorder-group>

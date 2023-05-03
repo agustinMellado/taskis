@@ -11,42 +11,50 @@ import { ItemReorderEventDetail } from '@ionic/angular';
   templateUrl: './agregar-actualizar-tarea.component.html',
   styleUrls: ['./agregar-actualizar-tarea.component.scss'],
 })
-export class AgregarActualizarTareaComponent  implements OnInit {
+export class AgregarActualizarTareaComponent implements OnInit {
   //configuracion para que se puedan editar las tareas
-  @Input() tarea:Tareas;
-  user={} as User
- //formulario para poder editar las tareas
-  form= new FormGroup({
+  @Input() tarea: Tareas;
+  user = {} as User;
+  //formulario para poder editar las tareas
+  form = new FormGroup({
     id: new FormControl(''),
-    titulo: new FormControl('',[Validators.required,Validators.minLength(4)]),
-    descripcion: new FormControl('',[Validators.required,Validators.minLength(4)]),
-    item: new FormControl([],[Validators.required,Validators.minLength(1)])
-
-  })
+    titulo: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    descripcion: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+    item: new FormControl([], [Validators.required, Validators.minLength(1)]),
+  });
   constructor(
-    private firebaseSvc:FirebaseService,
-    private utilsSvc:UtilsService
-  ) { }
+    private firebaseSvc: FirebaseService,
+    private utilsSvc: UtilsService
+  ) {}
 
   ngOnInit() {
-    this.user= this.utilsSvc.getElementFrontLocalStorage('user')
+    this.user = this.utilsSvc.getElementFrontLocalStorage('user');
 
-    //si existe la tarea 
-    if(this.tarea){//la necesitamos visualizar para poder editarla.
+    //si existe la tarea
+    if (this.tarea) {
+      //la necesitamos visualizar para poder editarla.
       this.form.setValue(this.tarea);
-      this.form.updateValueAndValidity()
+      this.form.updateValueAndValidity();
     }
   }
-  getPorcentaje(){
+  getPorcentaje() {
     //mando por parametro las tareas
     return this.utilsSvc.getPorcentaje(this.form.value as Tareas);
   }
   //reorganizar tareas
   handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
-
-  
     this.form.value.item = ev.detail.complete(this.form.value.item);
-
-    
+    //actualizamos despues que el usuario reordene
+    this.form.updateValueAndValidity()
+  }
+  //remover
+  removeItem(index: number) {
+    //quitar elemento de un arreglo por su indice
+    this.form.value.item.splice(index,1);
+    //actualizamos el formulario.
+    this.form.updateValueAndValidity()
   }
 }
