@@ -54,7 +54,9 @@ export class HomePage implements OnInit {
     private utilsSvc: UtilsService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.agregarOActualizarTarea(this.tareas[0])
+  }
   getPorcentaje(tarea:Tareas){
     //mando por parametro las tareas
     return this.utilsSvc.getPorcentaje(tarea)
