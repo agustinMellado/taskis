@@ -31,7 +31,7 @@ export class AgregarActualizarTareaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.user = this.utilsSvc.getElementFrontLocalStorage('user');
+    this.user = this.utilsSvc.getElementFromLocalStorage('user');
 
     //si existe la tarea
     if (this.tarea) {
