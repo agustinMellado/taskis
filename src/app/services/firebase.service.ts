@@ -46,7 +46,8 @@ export class FirebaseService {
   // firestore base de datos
 
   getSubcollection(path: string, subcollectionName: string) {
-    return this.db.doc(path).collection(subcollectionName).valueChanges()
+    //mandamos el id del elemento tarea 
+    return this.db.doc(path).collection(subcollectionName).valueChanges({idField:'id'})
   }
 
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { log } from 'console';
 import { Tareas } from 'src/app/models/tareas.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -21,8 +22,13 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.agregarOActualizarTarea(this.tareas[0])
+    
   }
+  //vista al entrar
+  ionViewWillEnter() {
+    this.getTask()
+  }
+
   getPorcentaje(tarea:Tareas){
     //mando por parametro las tareas
     return this.utilsSvc.getPorcentaje(tarea)
@@ -40,7 +46,11 @@ export class HomePage implements OnInit {
     let user: User =this.utilsSvc.getElementFromLocalStorage('user');
     //nombre de la coleccion
     let path=`users/${user.uid}`//toma el id
-    //pasamos el path mas el nombre de la coleccion
-    this.firebaseSvc.getSubcollection(path,'tareas')
+    //pasamos el path mas el nombre de la coleccion para suscribirnos
+    this.firebaseSvc.getSubcollection(path,'tareas').subscribe({
+      next:(res)=>{
+        console.log(res);
+      }
+    })
   }
 }
