@@ -11,6 +11,7 @@
     <ion-grid>
         <ion-row>
             <!-- configuracion de tamanios para cada tipo de pantalla -->
+            <!-- aplico directiva ngfor para recorrer cada uno de los elementos del arreglo -->
             <ion-col *ngFor="let t of tareas" size-lg="6" size-md="6" size-sm="12" size="12">
                 <ion-card mode="md">
 
@@ -34,7 +35,7 @@
                                 <p>{{t.descripcion | slice:0:85}}</p>
                                 <!-- botones -->
                                 <div class="ion-text-center">
-                                    <ion-button   class="boton-tarea" size="small">
+                                    <ion-button  (click)="agregarOActualizarTarea(t)" class="boton-tarea" size="small">
                                         Ver Tarea
                                         <ion-icon slot="end" name="book-outline"></ion-icon>
                                     </ion-button>
