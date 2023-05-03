@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/models/user.model';
-import { Tareas } from 'src/app/models/tareas.model';
+import { User} from 'src/app/models/user.model';
+import { Tareas, Item } from 'src/app/models/tareas.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ItemReorderEventDetail } from '@ionic/angular';
@@ -56,5 +56,37 @@ export class AgregarActualizarTareaComponent implements OnInit {
     this.form.value.item.splice(index,1);
     //actualizamos el formulario.
     this.form.updateValueAndValidity()
+  }
+  //agregar un nuevo item de a la actividad
+  createItem(){
+    this.utilsSvc.presentAlert({
+      header:'Nueva Actividad',
+      backdropDismiss:false,//para que no se pueda salir clickeando afuera.
+      inputs:[
+        {
+          name:'name',
+          type:'textarea',
+          placeholder: 'Que queres hacer?',
+          
+        }
+      ],buttons: [//alerta con botones
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Agregar',
+          handler: (res) => { //usamos res xq necesitamos saber el valor de la respuesta
+            //agrega item
+            //variable del tipo Item para almacenar y guardar
+            let item : Item={name:res.name, finalizado: false};
+            //accedemos a nuestro arreglo de item y le mandamos el item nuevo que creamos
+            this.form.value.item.push(item);
+             //Actualizamos la lista de items
+            this.form.updateValueAndValidity()
+          },
+        },
+      ],
+    })
   }
 }

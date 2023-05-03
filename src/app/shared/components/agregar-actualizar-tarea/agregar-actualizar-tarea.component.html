@@ -48,32 +48,41 @@
         <ion-label>Actividades</ion-label>
         <!-- Mostramos el progreso de las tareas, si al menos existe una tarea -->
         <span slot="end" *ngIf="form.value.item.length">Progreso: {{getPorcentaje()}}%</span>
-
-        <ion-button slot="end">
+        <!-- Boton para agregar un nuevo item a la actividad -->
+        <ion-button (click)="createItem()" slot="end">
             <ion-icon  name="add-circle-outline"></ion-icon>
         </ion-button>
     </ion-item>
     <!-- barra de progreso -->
     <ion-range [value]="getPorcentaje()">
     </ion-range>
-    <!-- Muesta las actividades y permite reorganizarlas -->
+    <!-- Muesta las actividades y permite reorganizarlas o borrarlas -->
     <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
-            <!-- recorremos los items pero del formulario -->
-          <ion-item *ngFor="let item of form.value.item; index as i">
-            <!-- marcar las actividades como finalizadas -->
-            <ion-checkbox slot="start" color="success" [(ngModel)]="item.finalizado"></ion-checkbox>
-            <ion-label>
-              {{ item.name }}
-            </ion-label>
 
-            <ion-buttons slot="end">
-                <ion-button (click)="removeItem(i)">
-                    <ion-icon  name="trash-outline"></ion-icon>
-                </ion-button>
-            </ion-buttons>
+        <div *ngFor="let item of form.value.item; index as i">
+                <!-- recorremos los items pero del formulario -->
+            <ion-item lines="none" >
+                <!-- marcar las actividades como finalizadas -->
+                <ion-checkbox slot="start" color="success" [(ngModel)]="item.finalizado"></ion-checkbox>
+                <!-- ion-text-wrap se aplica para que el texto no se corte y salte de linea -->
+                <ion-label class="ion-text-wrap">
+                {{ item.name }}
+                </ion-label>
 
-            <ion-reorder slot="end"></ion-reorder>
-          </ion-item>
+                <ion-buttons slot="end">
+                    <ion-button (click)="removeItem(i)">
+                        <ion-icon  name="trash-outline"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+
+                
+            </ion-item>
+            <!-- reorganiza las actividades -->
+            <ion-item class="ion-reorder">
+                <ion-reorder slot="end"></ion-reorder>
+            </ion-item>
+
+        </div>
+
     </ion-reorder-group>
-      
 </ion-content>
