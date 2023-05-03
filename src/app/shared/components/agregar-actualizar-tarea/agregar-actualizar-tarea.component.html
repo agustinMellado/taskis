@@ -1,3 +1,56 @@
 <ion-content color="light">
-<app-header color="light" [centrarTitulo]=true [isModal]=true titulo="Tarea"></app-header>
+    <app-header
+    color="light"
+    [centrarTitulo]="true"
+    [isModal]="true"
+    titulo="Tarea"
+    ></app-header>
+    <!-- ingreso del titulo -->
+    <app-custom-input
+        autocomplete="name"
+        [control]="form.controls.titulo"
+        type="text"
+        label="Titulo"
+    ></app-custom-input>
+    <!-- contemplar posibles errores -->
+    <div
+        class="validators"
+        *ngIf="form.controls.titulo.errors && form.controls.titulo.dirty"
+    >
+        <div *ngIf="form.controls.titulo.errors?.['required']">
+            Este campo es requerido.
+        </div>
+        <div *ngIf="form.controls.titulo.errors?.['minlength']">
+            Debe haber al menos 4 caracteres
+        </div>
+    </div>
+    <!-- ingreso de la descripcion  -->
+    <app-custom-input
+    autocomplete="name"
+    [control]="form.controls.titulo"
+    type="textarea"
+    label="Descripcion"
+    ></app-custom-input>
+    <!-- contemplar posibles errores -->
+    <div
+    class="validators"
+    *ngIf="form.controls.descripcion.errors && form.controls.descripcion.dirty"
+    >
+    <div *ngIf="form.controls.descripcion.errors?.['required']">
+        Este campo es requerido.
+    </div>
+    <div *ngIf="form.controls.descripcion.errors?.['minlength']">
+        Debe haber al menos 4 caracteres
+    </div>
+    </div>
+
+    <ion-item class='item-header' line="none">
+        <ion-label>Actividades</ion-label>
+        <ion-button slot="end">
+            <ion-icon  name="add-circle-outline"></ion-icon>
+        </ion-button>
+    </ion-item>
+    <!-- barra de progreso -->
+    <ion-range [value]="getPorcentaje()">
+    </ion-range>
 </ion-content>

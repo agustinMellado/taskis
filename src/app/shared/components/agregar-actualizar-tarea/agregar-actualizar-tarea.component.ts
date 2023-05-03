@@ -36,5 +36,8 @@ export class AgregarActualizarTareaComponent  implements OnInit {
       this.form.updateValueAndValidity()
     }
   }
-
+  getPorcentaje(){
+    //mando por parametro las tareas
+    return this.utilsSvc.getPorcentaje(this.form.value as Tareas);
+  }
 }

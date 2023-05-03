@@ -1,4 +1,5 @@
-<ion-item class="ion-margin-vertical">
+<!-- // input normal -->
+<ion-item  *ngIf="type !== 'textarea'" class="ion-margin-vertical">
   <ion-icon color="primary"*ngIf="icon" slot="start" [name]="icon"></ion-icon>
   <ion-label position="floating">{{label}}</ion-label>
   <!-- debounce para generar un retraso al mostrar el error -->
@@ -9,4 +10,10 @@
       
     </ion-button>
   </ion-buttons>
+</ion-item>
+<!-- input textarea -->
+<ion-item *ngIf="type == 'textarea'" class="ion-margin-vertical">
+  <ion-label position="floating">{{label}}</ion-label>
+  <!-- auto-grow sirve para que el espacio del texto se agrande cuando se escribe -->
+  <ion-textarea auto-grow="true" debounce="500" [formControl]="control" ></ion-textarea>
 </ion-item>

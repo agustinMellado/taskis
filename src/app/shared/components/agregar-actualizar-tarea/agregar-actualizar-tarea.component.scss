@@ -1,0 +1,13 @@
+.item-header{
+    --padding-top:30px;
+    ion-label{
+        font-size:18px;
+        font-weight:bold;
+    }
+}
+ion-range{
+    --bar-background: gray;
+    --bar-background-active: var(--ion-color-success);
+    --height:20px;
+    --knob-size:5px;//tamaño del circulo de la barra
+}
