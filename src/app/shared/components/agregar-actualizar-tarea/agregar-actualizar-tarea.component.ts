@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User} from 'src/app/models/user.model';
+import { User } from 'src/app/models/user.model';
 import { Tareas, Item } from 'src/app/models/tareas.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -19,10 +19,7 @@ export class AgregarActualizarTareaComponent implements OnInit {
   form = new FormGroup({
     id: new FormControl(''),
     titulo: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    descripcion: new FormControl('', [
-      Validators.required,
-      Validators.minLength(4),
-    ]),
+    descripcion: new FormControl('', [Validators.required, Validators.minLength(4)]),
     item: new FormControl([], [Validators.required, Validators.minLength(1)]),
   });
   constructor(
@@ -40,6 +37,89 @@ export class AgregarActualizarTareaComponent implements OnInit {
       this.form.updateValueAndValidity();
     }
   }
+  //funcion para ejecutar las siguientes funciones condicionalmente
+  submit() {
+    //solamente se ejecuta si el formulario esta completado
+    if (this.form.valid) {
+      //si existe la tarea
+      if (this.tarea) {
+        //estamos actualizando xq le pasamos una tarea.
+        this.actualizarTarea();
+      } else {
+        //sino estamos creando una.
+        this.crearTarea();
+      }
+    }
+  }
+  //Crear tarea
+  crearTarea() {
+    let path = `users/${this.user.uid}`;
+    //como es una petision a la bd y puede tardar llamo a la funcion
+    this.utilsSvc.presentLoading();
+    //borro el id una vez que se cree la tarea
+    delete this.form.value.id;
+    //realizo la promesa para agregar el objeto a la coleccion.
+    this.firebaseSvc.addSubcollection(path, 'tareas', this.form.value).then(
+      (res) => {
+        this.utilsSvc.dismissModal({ success: true });
+        //muestro mensaje
+        this.utilsSvc.presentToast({
+          message: 'Tarea creada exitosamente!',
+          color: 'success',
+          icon: 'checkmark-circle-outline',
+          duration: 1500,
+        });
+        //cierro la carga
+        this.utilsSvc.dismissLoading();
+      },
+      (error) => {
+        //muestro mensaje
+        this.utilsSvc.presentToast({
+          message: error,
+          color: 'warning',
+          icon: 'alert-checkmark-circle-outline',
+          duration: 5000,
+        });
+        //cierro la carga
+        this.utilsSvc.dismissLoading();
+      }
+    );
+  }
+
+  //actualizar/editar la tarea
+  actualizarTarea() {
+    let path = `users/${this.user.uid}/tareas/${this.tarea.id}`; //le paso la ruta exacta de donde se encuentra
+    //como es una petision a la bd y puede tardar llamo a la funcion
+    this.utilsSvc.presentLoading();
+    //borro el id una vez que se cree la tarea
+    delete this.form.value.id;
+    //realizo la promesa para actualizar el objeto a la coleccion.
+    this.firebaseSvc.updateDocument(path, this.form.value).then(
+      (res) => {
+        console.log(this.form.value)
+        this.utilsSvc.dismissModal({ success: true });
+        //muestro mensaje
+        this.utilsSvc.presentToast({
+          message: 'Tarea actualizada exitosamente!',
+          color: 'success',
+          icon: 'checkmark-circle-outline',
+          duration: 1500,
+        });
+        this.utilsSvc.dismissLoading();
+      },
+      (error) => {
+        //muestro mensaje
+        this.utilsSvc.presentToast({
+          message: error,
+          color: 'warning',
+          icon: 'alert-checkmark-circle-outline',
+          duration: 5500,
+        });
+        this.utilsSvc.dismissLoading();
+      }
+    );
+  }
+
   getPorcentaje() {
     //mando por parametro las tareas
     return this.utilsSvc.getPorcentaje(this.form.value as Tareas);
@@ -48,45 +128,47 @@ export class AgregarActualizarTareaComponent implements OnInit {
   handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
     this.form.value.item = ev.detail.complete(this.form.value.item);
     //actualizamos despues que el usuario reordene
-    this.form.updateValueAndValidity()
+    this.form.updateValueAndValidity();
   }
   //remover
   removeItem(index: number) {
     //quitar elemento de un arreglo por su indice
-    this.form.value.item.splice(index,1);
+    this.form.value.item.splice(index, 1);
     //actualizamos el formulario.
-    this.form.updateValueAndValidity()
+    this.form.updateValueAndValidity();
   }
   //agregar un nuevo item de a la actividad
-  createItem(){
+  createItem() {
     this.utilsSvc.presentAlert({
-      header:'Nueva Actividad',
-      backdropDismiss:false,//para que no se pueda salir clickeando afuera.
-      inputs:[
+      header: 'Nueva Actividad',
+      backdropDismiss: false, //para que no se pueda salir clickeando afuera.
+      inputs: [
         {
-          name:'name',
-          type:'textarea',
+          name: 'name',
+          type: 'textarea',
           placeholder: 'Que queres hacer?',
-          
-        }
-      ],buttons: [//alerta con botones
+        },
+      ],
+      buttons: [
+        //alerta con botones
         {
           text: 'Cancelar',
           role: 'cancel',
         },
         {
           text: 'Agregar',
-          handler: (res) => { //usamos res xq necesitamos saber el valor de la respuesta
+          handler: (res) => {
+            //usamos res xq necesitamos saber el valor de la respuesta
             //agrega item
             //variable del tipo Item para almacenar y guardar
-            let item : Item={name:res.name, finalizado: false};
+            let item: Item = { name: res.name, finalizado: false };
             //accedemos a nuestro arreglo de item y le mandamos el item nuevo que creamos
             this.form.value.item.push(item);
-             //Actualizamos la lista de items
-            this.form.updateValueAndValidity()
+            //Actualizamos la lista de items
+            this.form.updateValueAndValidity();
           },
         },
       ],
-    })
+    });
   }
 }

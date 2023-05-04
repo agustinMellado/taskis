@@ -3,7 +3,7 @@
     color="light"
     [centrarTitulo]="true"
     [isModal]="true"
-    titulo="Tarea"
+    [titulo]="tarea ? 'Tarea ' : 'Nueva Tarea'"
     ></app-header>
     <!-- ingreso del titulo -->
     <app-custom-input
@@ -85,4 +85,13 @@
         </div>
 
     </ion-reorder-group>
+
+    
 </ion-content>
+<ion-footer>
+    <div class="ion-text-center">
+        <ion-button class="ion-no-margin" [disabled]="form.invalid" (click)="submit()" shape="round">
+            {{tarea ? 'Guardar Cambios' : 'Crear Tarea'}}
+        </ion-button>
+    </div>
+</ion-footer>

@@ -58,12 +58,12 @@ export class FirebaseService {
   //actualizar documento especifico
   updateDocument(path: string, object:any){//recibe por parametro la ruta y el objeto a modifica
     //busco por la ruta y actualizo el objeto
-    return this.db.doc(path).update(object)
+    return this.db.doc(path).update(object);
 
   }
   //borrar tarea
-  deleteDocument(path: string, object:any){    
-    return this.db.doc(path).delete
+  deleteDocument(path: string){    
+    return this.db.doc(path).delete();
 
   }
 
