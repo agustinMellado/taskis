@@ -49,6 +49,23 @@ export class FirebaseService {
     //mandamos el id del elemento tarea 
     return this.db.doc(path).collection(subcollectionName).valueChanges({idField:'id'})
   }
+  //crear una nueva tarea
+  addSubcollection(path: string, subcollectionName: string, object:any) {
+
+    return this.db.doc(path).collection(subcollectionName).add(object)//al pasar el objeto nos crea un id de manera random
+    
+  }
+  //actualizar documento especifico
+  updateDocument(path: string, object:any){//recibe por parametro la ruta y el objeto a modifica
+    //busco por la ruta y actualizo el objeto
+    return this.db.doc(path).update(object)
+
+  }
+  //borrar tarea
+  deleteDocument(path: string, object:any){    
+    return this.db.doc(path).delete
+
+  }
 
 
 }
