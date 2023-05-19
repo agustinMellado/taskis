@@ -13,6 +13,7 @@ export class HomePage implements OnInit {
   //Variable que va a almacenar una cadena de objetos
   tareas: Tareas[] = [];
   user = {} as User;
+  loading:boolean=false;
   constructor(
     private firebaseSvc: FirebaseService,
     private utilsSvc: UtilsService
@@ -50,12 +51,15 @@ export class HomePage implements OnInit {
     let user: User = this.utilsSvc.getElementFromLocalStorage('user');
     //nombre de la coleccion
     let path = `users/${user.uid}`; //toma el id
+    //variable para mostrar efecto de carga 
+    this.loading=true
     //pasamos el path mas el nombre de la coleccion para suscribirnos
     let sub = this.firebaseSvc.getSubcollection(path, 'tareas').subscribe({
       next: (res: Tareas[]) => {
         console.log(res);
         this.tareas = res;
         sub.unsubscribe(); //aplicamos unsubscribe para no saturar a la base de datos con consultas.
+        this.loading=false//terminamos el efecto de carga
       },
     });
   }
