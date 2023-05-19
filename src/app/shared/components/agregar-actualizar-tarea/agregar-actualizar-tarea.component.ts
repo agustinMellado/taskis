@@ -43,7 +43,7 @@ export class AgregarActualizarTareaComponent implements OnInit {
   //funcion para ejecutar las siguientes funciones condicionalmente
   submit() {
     //solamente se ejecuta si el formulario esta completado
-    if (this.form.valid) {
+   
       //si existe la tarea
       if (this.tarea) {
         //estamos actualizando xq le pasamos una tarea.
@@ -51,7 +51,7 @@ export class AgregarActualizarTareaComponent implements OnInit {
       } else {
         //sino estamos creando una.
         this.crearTarea();
-      }
+   
     }
   }
   //Crear tarea
@@ -138,7 +138,7 @@ export class AgregarActualizarTareaComponent implements OnInit {
     //quitar elemento de un arreglo por su indice
     this.form.value.item.splice(index, 1);
     //actualizamos el formulario.
-    this.form.updateValueAndValidity();
+    this.form.controls.item.updateValueAndValidity();
   }
   //agregar un nuevo item de a la actividad
   createItem() {
@@ -168,7 +168,7 @@ export class AgregarActualizarTareaComponent implements OnInit {
             //accedemos a nuestro arreglo de item y le mandamos el item nuevo que creamos
             this.form.value.item.push(item);
             //Actualizamos la lista de items
-            this.form.updateValueAndValidity();
+            this.form.controls.item.updateValueAndValidity();
           },
         },
       ],

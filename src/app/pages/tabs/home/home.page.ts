@@ -29,12 +29,17 @@ export class HomePage implements OnInit {
     //mando por parametro las tareas
     return this.utilsSvc.getPorcentaje(tarea);
   }
-  agregarOActualizarTarea(tarea?: Tareas) {
-    this.utilsSvc.presentModal({
+  async agregarOActualizarTarea(tarea?: Tareas) {
+    //funcion para traer las tareas una vez que esta se haya creado/actualizado
+    let res= await this.utilsSvc.presentModal({
       component: AgregarActualizarTareaComponent,
       componentProps: { tarea },
       cssClass: 'agregar-actualizar-modal',
     });
+    //si existe, llamamos para que actualice la vista
+    if (res&&res.success){
+    this.getTask()
+    }
   }
   // agarro las tareas
   getTask() {
