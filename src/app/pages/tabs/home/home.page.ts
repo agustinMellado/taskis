@@ -18,39 +18,36 @@ export class HomePage implements OnInit {
     private utilsSvc: UtilsService
   ) {}
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
   //Al entrar a la pagina inicia y muestra la funcion
   ionViewWillEnter() {
     //llama a esta funcion
-    this.getTask()
+    this.getTask();
   }
 
-  getPorcentaje(tarea:Tareas){
+  getPorcentaje(tarea: Tareas) {
     //mando por parametro las tareas
-    return this.utilsSvc.getPorcentaje(tarea)
+    return this.utilsSvc.getPorcentaje(tarea);
   }
-  agregarOActualizarTarea(tarea?:Tareas){
+  agregarOActualizarTarea(tarea?: Tareas) {
     this.utilsSvc.presentModal({
       component: AgregarActualizarTareaComponent,
-      componentProps:{tarea},
-      cssClass:'agregar-actualizar-modal'
-    })
-
+      componentProps: { tarea },
+      cssClass: 'agregar-actualizar-modal',
+    });
   }
   // agarro las tareas
-  getTask(){
-    let user: User =this.utilsSvc.getElementFromLocalStorage('user');
+  getTask() {
+    let user: User = this.utilsSvc.getElementFromLocalStorage('user');
     //nombre de la coleccion
-    let path=`users/${user.uid}`//toma el id
+    let path = `users/${user.uid}`; //toma el id
     //pasamos el path mas el nombre de la coleccion para suscribirnos
-    let sub=this.firebaseSvc.getSubcollection(path,'tareas').subscribe({
-      next:(res: Tareas[])=>{
+    let sub = this.firebaseSvc.getSubcollection(path, 'tareas').subscribe({
+      next: (res: Tareas[]) => {
         console.log(res);
-        this.tareas = res
-        sub.unsubscribe();//aplicamos unsubscribe para no saturar a la base de datos con consultas.
-      }
-    })
+        this.tareas = res;
+        sub.unsubscribe(); //aplicamos unsubscribe para no saturar a la base de datos con consultas.
+      },
+    });
   }
 }

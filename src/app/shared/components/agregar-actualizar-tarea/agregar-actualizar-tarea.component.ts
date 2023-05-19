@@ -19,7 +19,10 @@ export class AgregarActualizarTareaComponent implements OnInit {
   form = new FormGroup({
     id: new FormControl(''),
     titulo: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    descripcion: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    descripcion: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
     item: new FormControl([], [Validators.required, Validators.minLength(1)]),
   });
   constructor(
@@ -56,7 +59,7 @@ export class AgregarActualizarTareaComponent implements OnInit {
     let path = `users/${this.user.uid}`;
     //como es una petision a la bd y puede tardar llamo a la funcion
     this.utilsSvc.presentLoading();
-    //borro el id una vez que se cree la tarea
+    //borro el id una vez que se cree la tarea, para que no se guarde
     delete this.form.value.id;
     //realizo la promesa para agregar el objeto a la coleccion.
     this.firebaseSvc.addSubcollection(path, 'tareas', this.form.value).then(
@@ -96,7 +99,7 @@ export class AgregarActualizarTareaComponent implements OnInit {
     //realizo la promesa para actualizar el objeto a la coleccion.
     this.firebaseSvc.updateDocument(path, this.form.value).then(
       (res) => {
-        console.log(this.form.value)
+        console.log(this.form.value);
         this.utilsSvc.dismissModal({ success: true });
         //muestro mensaje
         this.utilsSvc.presentToast({
