@@ -5,7 +5,7 @@
     <div class="content">
        
             <ion-button  (click)="agregarOActualizarTarea()" class="ion-margin" >
-                Ver Tarea
+               Nueva tarea
                 <ion-icon slot="end" name="add-circle-outline"></ion-icon>
             </ion-button>
     <ion-grid>
@@ -39,7 +39,7 @@
                                         Ver Tarea
                                         <ion-icon slot="end" name="book-outline"></ion-icon>
                                     </ion-button>
-                                    <ion-button class="boton-tarea" size="small" color="danger">
+                                    <ion-button (click)="confirmarDelete(t)" class="boton-tarea" size="small" color="danger">
                                         Borrar Tarea
                                         <ion-icon slot="end" name="trash-outline"></ion-icon>
                                     </ion-button>
